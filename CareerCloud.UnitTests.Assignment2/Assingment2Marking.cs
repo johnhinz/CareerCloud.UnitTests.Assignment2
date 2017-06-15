@@ -79,7 +79,7 @@ namespace CareerCloud.UnitTests.Assignment2
             Assert.IsTrue(_types.Any(t => t.Name == "CompanyJobRepository"));
             Assert.IsTrue(_types.Any(t => t.Name == "CompanyJobSkillRepository"));
             Assert.IsTrue(_types.Any(t => t.Name == "CompanyLocationRepository"));
-            Assert.IsTrue(_types.Any(t => t.Name == "CompanyProfleRepository"));
+            Assert.IsTrue(_types.Any(t => t.Name == "CompanyProfileRepository"));
             Assert.IsTrue(_types.Any(t => t.Name == "SecurityLoginLogRepository"));
             Assert.IsTrue(_types.Any(t => t.Name == "SecurityLoginRepository"));
             Assert.IsTrue(_types.Any(t => t.Name == "SecurityLoginRoleRepository"));
@@ -368,32 +368,87 @@ namespace CareerCloud.UnitTests.Assignment2
             SystemLanguageCodeCheck();
 
             CompanyProfileAdd();
-
-
+            CompanyProfileCheck();
+            CompanyProfileUpdate();
+            CompanyProfileCheck();
 
             CompanyDescriptionAdd();
+            CompanyDescriptionCheck();
+            CompanyDescriptionUpdate();
+            CompanyDescriptionCheck();
+
             CompanyJobAdd();
+            CompanyJobCheck();
+            CompanyJobUpdate();
+            CompanyJobCheck();
+
             CompanyJobDescriptionAdd();
+            CompanyJobDescriptionCheck();
+            CompanyJobDescriptionUpdate();
+            CompanyJobDescriptionCheck();
+
             CompanyLocationAdd();
+            CompanyLocationCheck();
+            CompanyLocationUpdate();
+            CompanyLocationCheck();
+
             CompanyJobEducationAdd();
+            CompanyJobEducationCheck();
+            CompanyJobEducationUpdate();
+            CompanyJobEducationCheck();
+
             CompanyJobSkillAdd();
+            CompanyJobSkillCheck();
+            CompanyJobSkillUpdate();
+            CompanyJobSkillCheck();
 
             SecurityLoginAdd();
+            SecurityLoginCheck();
+            SecurityLoginUpdate();
+            SecurityLoginCheck();
+
             SecurityLoginLogAdd();
+            SecurityLoginLogCheck();
+            SecurityLoginLogUpdate();
+            SecurityLoginLogCheck();
+
             SecurityRoleAdd();
+            SecurityRoleCheck();
+            SecurityRoleUpdate();
+            SecurityRoleCheck();
+
             SecurityLoginRoleAdd();
+            SecurityLoginRoleCheck();
 
             ApplicantProfileAdd();
+            ApplicantProfileCheck();
+            ApplicantProfileUpdate();
+            ApplicantProfileCheck();
+
             ApplicantEducationAdd();
+            ApplicantEducationCheck();
+            ApplicantEducationUpdate();
+            ApplicantEducationCheck();
+
             ApplicantJobApplicationAdd();
+            ApplicantJobApplicationCheck();
+            ApplicantJobApplicationUpdate();
+            ApplicantJobApplicationCheck();
+
             ApplicantResumeAdd();
+            ApplicantResumeCheck();
+            ApplicantResumeUpdate();
+            ApplicantResumeCheck();
+
             ApplicantSkillAdd();
+            ApplicantSkillCheck();
+            ApplicantSkillUpdate();
+            ApplicantSkillCheck();
 
             ApplicantWorkHistoryAdd();
             ApplicantWorkHistoryCheck();
             ApplicantWorkHistoryUpdate();
             ApplicantWorkHistoryCheck();
-
 
             #region Cleanup
             ApplicantWorkHistoryRemove();
@@ -424,6 +479,156 @@ namespace CareerCloud.UnitTests.Assignment2
         }
 
         #region UpdateImplementation
+        public void CompanyProfileUpdate()
+        {
+            _companyProfile.CompanyWebsite = Faker.Internet.Host();
+            _companyProfile.ContactName = Faker.Name.FullName();
+            _companyProfile.ContactPhone = "999-555-8799";
+            _companyProfile.RegistrationDate = Faker.Date.Past();
+            CompanyProfileRepository companyProfileRepo = new CompanyProfileRepository();
+            companyProfileRepo.Update(new CompanyProfilePoco[] { _companyProfile });
+        }
+
+        public void CompanyDescriptionUpdate()
+        {
+            _companyDescription.CompanyDescription = Faker.Company.CatchPhrase();
+            _companyDescription.CompanyName = Faker.Company.CatchPhrasePos();
+            CompanyDescriptionRepository repo = new CompanyDescriptionRepository();
+            repo.Update(new CompanyDescriptionPoco[] { _companyDescription });
+        }
+
+        public void SecurityRoleUpdate()
+        {
+            _securityRole.IsInactive = true;
+            _securityRole.Role = Truncate(Faker.Company.Industry(), 50);
+            SecurityRoleRepository repo = new SecurityRoleRepository();
+            repo.Update(new SecurityRolePoco[] { _securityRole });
+        }
+
+        public void CompanyJobUpdate()
+        {
+            _companyJob.IsCompanyHidden = true;
+            _companyJob.IsInactive = true;
+            _companyJob.ProfileCreated = Faker.Date.Past();
+            CompanyJobRepository repo = new CompanyJobRepository();
+            repo.Update(new CompanyJobPoco[] { _companyJob });
+
+        }
+
+        public void CompanyJobDescriptionUpdate()
+        {
+            _companyJobDescription.JobDescriptions = Truncate(Faker.Lorem.Paragraph(), 999);
+            _companyJobDescription.JobName = Truncate(Faker.Lorem.Sentence(), 99);
+            CompanyJobDescriptionRepository repo = new CompanyJobDescriptionRepository();
+            repo.Update(new CompanyJobDescriptionPoco[] { _companyJobDescription });
+        }
+
+        public void CompanyLocationUpdate()
+        {
+            _companyLocation.City = Faker.Address.CityPrefix();
+            _companyLocation.CountryCode = _systemCountry.Code;
+            _companyLocation.Province = Faker.Address.ProvinceAbbreviation();
+            _companyLocation.Street = Faker.Address.StreetName();
+            _companyLocation.PostalCode = Faker.Address.CanadianZipCode();
+            CompanyLocationRepository repo = new CompanyLocationRepository();
+            repo.Update(new CompanyLocationPoco[] { _companyLocation });
+        }
+
+        public void CompanyJobEducationUpdate()
+        {
+            _companyJobEducation.Importance = 1;
+            _companyJobEducation.Major = Truncate(Faker.Lorem.Sentence(), 100);
+            CompanyJobEducationRepository repo = new CompanyJobEducationRepository();
+            repo.Update(new CompanyJobEducationPoco[] { _companyJobEducation });
+        }
+
+        public void CompanyJobSkillUpdate()
+        {
+            _companyJobSkill.Importance = 1;
+            _companyJobSkill.Skill = Truncate(Faker.Lorem.Sentence(), 100);
+            _companyJobSkill.SkillLevel = String.Concat(Faker.Lorem.Letters(10));
+            CompanyJobSkillRepository repo = new CompanyJobSkillRepository();
+            repo.Update(new CompanyJobSkillPoco[] { _companyJobSkill });
+        }
+
+        public void SecurityLoginUpdate()
+        {
+            _securityLogin.Login = Faker.User.Email();
+            _securityLogin.AgreementAccepted = Faker.Date.PastWithTime();
+            _securityLogin.Created = Faker.Date.PastWithTime();
+            _securityLogin.EmailAddress = Faker.User.Email();
+            _securityLogin.ForceChangePassword = true;
+            _securityLogin.FullName = Faker.Name.FullName();
+            _securityLogin.IsInactive = true;
+            _securityLogin.IsLocked = true;
+            _securityLogin.Password = Faker.User.Password();
+            _securityLogin.PasswordUpdate = Faker.Date.Forward();
+            _securityLogin.PhoneNumber = "416-416-9889";
+            _securityLogin.PrefferredLanguage = "FR".PadRight(10);
+            SecurityLoginRepository repo = new SecurityLoginRepository();
+            repo.Update(new SecurityLoginPoco[] { _securityLogin });
+        }
+
+        public void SecurityLoginLogUpdate()
+        {
+            _securityLoginLog.IsSuccesful = false;
+            _securityLoginLog.LogonDate = Faker.Date.PastWithTime();
+            _securityLoginLog.SourceIP = Faker.Internet.IPv4().PadRight(15);
+            SecurityLoginLogRepository repo = new SecurityLoginLogRepository();
+            repo.Update(new SecurityLoginsLogPoco[] { _securityLoginLog });
+        }
+
+        public void ApplicantProfileUpdate()
+        {
+            _applicantProfile.City = Faker.Address.CityPrefix();
+            _applicantProfile.Currency = "US".PadRight(10);
+            _applicantProfile.CurrentRate = 61.25M;
+            _applicantProfile.CurrentSalary = 77500;
+            _applicantProfile.Province = Truncate(Faker.Address.Province(), 10).PadRight(10);
+            _applicantProfile.Street = Truncate(Faker.Address.StreetName(), 100);
+            _applicantProfile.PostalCode = Truncate(Faker.Address.CanadianZipCode(), 20).PadRight(20);
+            ApplicantProfileRepository repo = new ApplicantProfileRepository();
+            repo.Update(new ApplicantProfilePoco[] { _applicantProfile });
+        }
+
+        public void ApplicantEducationUpdate()
+        {
+            _applicantEducation.Major = Faker.Education.Major();
+            _applicantEducation.CertificateDiploma = Faker.Education.Major();
+            _applicantEducation.StartDate = Faker.Date.Past(3);
+            _applicantEducation.CompletionDate = Faker.Date.Past(1);
+            _applicantEducation.CompletionPercent = (byte)Faker.Number.RandomNumber(1);
+            ApplicantEducationRepository repo = new ApplicantEducationRepository();
+            repo.Update(new ApplicantEducationPoco[] { _applicantEducation });
+
+        }
+        public void ApplicantJobApplicationUpdate()
+        {
+            _applicantJobApplication.ApplicationDate = Faker.Date.Recent();
+            ApplicantJobApplicationRepository repo = new ApplicantJobApplicationRepository();
+            repo.Update(new ApplicantJobApplicationPoco[] { _applicantJobApplication });
+        }
+
+        public void ApplicantResumeUpdate()
+        {
+            _applicantResume.Resume = Faker.Lorem.Paragraph();
+            _applicantResume.LastUpdated = Faker.Date.Recent();
+            ApplicantResumeRepository repo = new ApplicantResumeRepository();
+            repo.Update(new ApplicantResumePoco[] { _applicantResume });
+        }
+
+        private void ApplicantSkillUpdate()
+        {
+            _applicantSkills.EndMonth = 12;
+            _applicantSkills.EndYear = 1999;
+            _applicantSkills.Skill = Truncate(Faker.Lorem.Sentence(), 100);
+            _applicantSkills.SkillLevel = Truncate(Faker.Lorem.Sentence(), 10);
+            _applicantSkills.StartMonth = 1;
+            _applicantSkills.StartYear = 1999;
+            ApplicantSkillRepository applicantSkillRepository = new ApplicantSkillRepository();
+            applicantSkillRepository.Update(new ApplicantSkillPoco[] { _applicantSkills });
+        }
+
         private void ApplicantWorkHistoryUpdate()
         {
             _appliantWorkHistory.CompanyName = Truncate(Faker.Lorem.Sentence(), 150);
@@ -466,7 +671,7 @@ namespace CareerCloud.UnitTests.Assignment2
 
         private void CompanyProfileRemove()
         {
-            CompanyProfleRepository companyProfileRepo = new CompanyProfleRepository();
+            CompanyProfileRepository companyProfileRepo = new CompanyProfileRepository();
             companyProfileRepo.Remove(new CompanyProfilePoco[] { _companyProfile });
             Assert.IsNull(companyProfileRepo.GetSingle(t => t.Id == _companyProfile.Id));
         }
@@ -604,6 +809,116 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             ApplicantSkillRepository applicantSkillRepository = applicantSkillRepository = new ApplicantSkillRepository();
             applicantSkillRepository.Add(new ApplicantSkillPoco[] { _applicantSkills });
+        }
+
+        private void ApplicantResumeAdd()
+        {
+            ApplicantResumeRepository applicantResumeRepository = new ApplicantResumeRepository();
+            applicantResumeRepository.Add(new ApplicantResumePoco[] { _applicantResume });
+        }
+
+        private void ApplicantJobApplicationAdd()
+        {
+            ApplicantJobApplicationRepository applicantJobApplicationRepository = new ApplicantJobApplicationRepository();
+            applicantJobApplicationRepository.Add(new ApplicantJobApplicationPoco[] { _applicantJobApplication });
+        }
+
+        private void ApplicantEducationAdd()
+        {
+            ApplicantEducationRepository applicantEducationRepository = new ApplicantEducationRepository();
+            applicantEducationRepository.Add(new ApplicantEducationPoco[] { _applicantEducation });
+        }
+
+        private void ApplicantProfileAdd()
+        {
+            ApplicantProfileRepository applicantProfileRepository = new ApplicantProfileRepository();
+            applicantProfileRepository.Add(new ApplicantProfilePoco[] { _applicantProfile });
+        }
+
+        private void SecurityLoginRoleAdd()
+        {
+            SecurityLoginRoleRepository securityLoginRoleRepository = new SecurityLoginRoleRepository();
+            securityLoginRoleRepository.Add(new SecurityLoginsRolePoco[] { _securityLoginRole });
+        }
+
+        private void SecurityRoleAdd()
+        {
+            SecurityRoleRepository securityRoleRepository = new SecurityRoleRepository();
+            securityRoleRepository.Add(new SecurityRolePoco[] { _securityRole });
+        }
+
+        private void SecurityLoginLogAdd()
+        {
+            SecurityLoginLogRepository securityLoginLogRepository = new SecurityLoginLogRepository();
+            securityLoginLogRepository.Add(new SecurityLoginsLogPoco[] { _securityLoginLog });
+        }
+
+        private void SecurityLoginAdd()
+        {
+            SecurityLoginRepository securityLoginRepository = new SecurityLoginRepository();
+            securityLoginRepository.Add(new SecurityLoginPoco[] { _securityLogin });
+        }
+
+        private void CompanyJobSkillAdd()
+        {
+            CompanyJobSkillRepository companyJobSkillRepository = new CompanyJobSkillRepository();
+            companyJobSkillRepository.Add(new CompanyJobSkillPoco[] { _companyJobSkill });
+        }
+
+        private void CompanyJobEducationAdd()
+        {
+            CompanyJobEducationRepository companyJobEducationRepo = new CompanyJobEducationRepository();
+            companyJobEducationRepo.Add(new CompanyJobEducationPoco[] { _companyJobEducation });
+        }
+
+        private void CompanyLocationAdd()
+        {
+            CompanyLocationRepository companyLocationRepo = new CompanyLocationRepository();
+            companyLocationRepo.Add(new CompanyLocationPoco[] { _companyLocation });
+        }
+
+        private void CompanyJobDescriptionAdd()
+        {
+            CompanyJobDescriptionRepository companyJobDescRepo = new CompanyJobDescriptionRepository();
+            companyJobDescRepo.Add(new CompanyJobDescriptionPoco[] { _companyJobDescription });
+        }
+
+        private void CompanyJobAdd()
+        {
+            CompanyJobRepository companyJobRepo = new CompanyJobRepository();
+            companyJobRepo.Add(new CompanyJobPoco[] { _companyJob });
+        }
+
+        private void CompanyDescriptionAdd()
+        {
+            CompanyDescriptionRepository companyDescriptionRepo = new CompanyDescriptionRepository();
+            companyDescriptionRepo.Add(new CompanyDescriptionPoco[] { _companyDescription });
+        }
+
+        private void CompanyProfileAdd()
+        {
+            CompanyProfileRepository companyProfileRepo = new CompanyProfileRepository();
+            companyProfileRepo.Add(new CompanyProfilePoco[] { _companyProfile });
+        }
+
+        private void SystemLanguageCodeAdd()
+        {
+            SystemLanguageCodeRepository systemLanguageCodeRepo = new SystemLanguageCodeRepository();
+            systemLanguageCodeRepo.Add(new SystemLanguageCodePoco[] { _systemLangCode });
+        }
+
+        private void SystemCountryCodeAdd()
+        {
+            SystemCountryCodeRepository systemCountryCodeRepository = new SystemCountryCodeRepository();
+            systemCountryCodeRepository.Add(new SystemCountryCodePoco[] { _systemCountry });
+        }
+
+        #endregion AddImplementation
+
+        #region CheckImplementation
+        private void ApplicantSkillCheck()
+        {
+            ApplicantSkillRepository applicantSkillRepository = applicantSkillRepository = new ApplicantSkillRepository();
             ApplicantSkillPoco applicantSkillPoco = applicantSkillRepository.GetSingle(t => t.Id == _applicantSkills.Id);
             Assert.IsNotNull(applicantSkillPoco);
             Assert.AreEqual(_applicantSkills.Id, applicantSkillPoco.Id);
@@ -616,10 +931,9 @@ namespace CareerCloud.UnitTests.Assignment2
             Assert.AreEqual(_applicantSkills.EndYear, applicantSkillPoco.EndYear);
         }
 
-        private void ApplicantResumeAdd()
+        private void ApplicantResumeCheck()
         {
             ApplicantResumeRepository applicantResumeRepository = new ApplicantResumeRepository();
-            applicantResumeRepository.Add(new ApplicantResumePoco[] { _applicantResume });
             ApplicantResumePoco applicantResumePoco = applicantResumeRepository.GetSingle(t => t.Id == _applicantResume.Id);
             Assert.IsNotNull(applicantResumePoco);
             Assert.AreEqual(_applicantResume.Id, applicantResumePoco.Id);
@@ -628,10 +942,9 @@ namespace CareerCloud.UnitTests.Assignment2
             Assert.AreEqual(_applicantResume.LastUpdated.Value.Date, applicantResumePoco.LastUpdated.Value.Date);
         }
 
-        private void ApplicantJobApplicationAdd()
+        private void ApplicantJobApplicationCheck()
         {
             ApplicantJobApplicationRepository applicantJobApplicationRepository = new ApplicantJobApplicationRepository();
-            applicantJobApplicationRepository.Add(new ApplicantJobApplicationPoco[] { _applicantJobApplication });
             ApplicantJobApplicationPoco applicantJobApplicationPoco = applicantJobApplicationRepository.GetSingle(t => t.Id == _applicantJobApplication.Id);
             Assert.IsNotNull(applicantJobApplicationPoco);
             Assert.AreEqual(_applicantJobApplication.Id, applicantJobApplicationPoco.Id);
@@ -640,10 +953,10 @@ namespace CareerCloud.UnitTests.Assignment2
             Assert.AreEqual(_applicantJobApplication.ApplicationDate.Date, applicantJobApplicationPoco.ApplicationDate.Date);
         }
 
-        private void ApplicantEducationAdd()
+
+        private void ApplicantEducationCheck()
         {
             ApplicantEducationRepository applicantEducationRepository = new ApplicantEducationRepository();
-            applicantEducationRepository.Add(new ApplicantEducationPoco[] { _applicantEducation });
             ApplicantEducationPoco applicantEducationPoco = applicantEducationRepository.GetSingle(t => t.Id == _applicantEducation.Id);
             Assert.IsNotNull(applicantEducationPoco);
             Assert.AreEqual(_applicantEducation.Id, applicantEducationPoco.Id);
@@ -655,10 +968,9 @@ namespace CareerCloud.UnitTests.Assignment2
             Assert.AreEqual(_applicantEducation.CompletionPercent, applicantEducationPoco.CompletionPercent);
         }
 
-        private void ApplicantProfileAdd()
+        private void ApplicantProfileCheck()
         {
             ApplicantProfileRepository applicantProfileRepository = new ApplicantProfileRepository();
-            applicantProfileRepository.Add(new ApplicantProfilePoco[] { _applicantProfile });
             ApplicantProfilePoco applicantProfilePoco = applicantProfileRepository.GetSingle(t => t.Id == _applicantProfile.Id);
             Assert.IsNotNull(applicantProfilePoco);
             Assert.AreEqual(_applicantProfile.Id, applicantProfilePoco.Id);
@@ -673,11 +985,9 @@ namespace CareerCloud.UnitTests.Assignment2
             Assert.AreEqual(_applicantProfile.PostalCode, applicantProfilePoco.PostalCode);
         }
 
-        private void SecurityLoginRoleAdd()
+        private void SecurityLoginRoleCheck()
         {
-            //   Security_Logins_Roles
             SecurityLoginRoleRepository securityLoginRoleRepository = new SecurityLoginRoleRepository();
-            securityLoginRoleRepository.Add(new SecurityLoginsRolePoco[] { _securityLoginRole });
             SecurityLoginsRolePoco securityLoginsRolePoco = securityLoginRoleRepository.GetSingle(t => t.Id == _securityLoginRole.Id);
             Assert.IsNotNull(securityLoginsRolePoco);
             Assert.AreEqual(_securityLoginRole.Id, securityLoginsRolePoco.Id);
@@ -685,11 +995,9 @@ namespace CareerCloud.UnitTests.Assignment2
             Assert.AreEqual(_securityLoginRole.Role, securityLoginsRolePoco.Role);
         }
 
-        private void SecurityRoleAdd()
+        private void SecurityRoleCheck()
         {
-            //   Security_Roles
             SecurityRoleRepository securityRoleRepository = new SecurityRoleRepository();
-            securityRoleRepository.Add(new SecurityRolePoco[] { _securityRole });
             SecurityRolePoco securityRolePoco = securityRoleRepository.GetSingle(t => t.Id == _securityRole.Id);
             Assert.IsNotNull(securityRolePoco);
             Assert.AreEqual(_securityRole.Id, securityRolePoco.Id);
@@ -697,10 +1005,9 @@ namespace CareerCloud.UnitTests.Assignment2
             Assert.AreEqual(_securityRole.IsInactive, securityRolePoco.IsInactive);
         }
 
-        private void SecurityLoginLogAdd()
+        private void SecurityLoginLogCheck()
         {
             SecurityLoginLogRepository securityLoginLogRepository = new SecurityLoginLogRepository();
-            securityLoginLogRepository.Add(new SecurityLoginsLogPoco[] { _securityLoginLog });
             SecurityLoginsLogPoco securityLoginsLogPoco = securityLoginLogRepository.GetSingle(t => t.Id == _securityLoginLog.Id);
             Assert.IsNotNull(securityLoginsLogPoco);
             Assert.AreEqual(_securityLoginLog.Id, securityLoginsLogPoco.Id);
@@ -709,10 +1016,9 @@ namespace CareerCloud.UnitTests.Assignment2
             Assert.AreEqual(_securityLoginLog.LogonDate.Date, securityLoginsLogPoco.LogonDate.Date);
         }
 
-        private void SecurityLoginAdd()
+        private void SecurityLoginCheck()
         {
             SecurityLoginRepository securityLoginRepository = new SecurityLoginRepository();
-            securityLoginRepository.Add(new SecurityLoginPoco[] { _securityLogin });
             SecurityLoginPoco securityLoginPoco = securityLoginRepository.GetSingle(t => t.Id == _securityLogin.Id);
             Assert.IsNotNull(securityLoginPoco);
             Assert.AreEqual(_securityLogin.Id, securityLoginPoco.Id);
@@ -730,10 +1036,9 @@ namespace CareerCloud.UnitTests.Assignment2
             Assert.AreEqual(_securityLogin.PrefferredLanguage, securityLoginPoco.PrefferredLanguage);
         }
 
-        private void CompanyJobSkillAdd()
+        private void CompanyJobSkillCheck()
         {
             CompanyJobSkillRepository companyJobSkillRepository = new CompanyJobSkillRepository();
-            companyJobSkillRepository.Add(new CompanyJobSkillPoco[] { _companyJobSkill });
             CompanyJobSkillPoco companyJobSkillPoco = companyJobSkillRepository.GetSingle(t => t.Id == _companyJobSkill.Id);
             Assert.IsNotNull(companyJobSkillPoco);
             Assert.AreEqual(_companyJobSkill.Id, companyJobSkillPoco.Id);
@@ -743,10 +1048,10 @@ namespace CareerCloud.UnitTests.Assignment2
             Assert.AreEqual(_companyJobSkill.Importance, companyJobSkillPoco.Importance);
         }
 
-        private void CompanyJobEducationAdd()
+
+        private void CompanyJobEducationCheck()
         {
             CompanyJobEducationRepository companyJobEducationRepo = new CompanyJobEducationRepository();
-            companyJobEducationRepo.Add(new CompanyJobEducationPoco[] { _companyJobEducation });
             CompanyJobEducationPoco companyJobEducationPoco = companyJobEducationRepo.GetSingle(t => t.Id == _companyJobEducation.Id);
             Assert.IsNotNull(companyJobEducationPoco);
             Assert.AreEqual(_companyJobEducation.Id, companyJobEducationPoco.Id);
@@ -755,10 +1060,9 @@ namespace CareerCloud.UnitTests.Assignment2
             Assert.AreEqual(_companyJobEducation.Importance, companyJobEducationPoco.Importance);
         }
 
-        private void CompanyLocationAdd()
+        private void CompanyLocationCheck()
         {
             CompanyLocationRepository companyLocationRepo = new CompanyLocationRepository();
-            companyLocationRepo.Add(new CompanyLocationPoco[] { _companyLocation });
             CompanyLocationPoco companyLocationPoco = companyLocationRepo.GetSingle(t => t.Id == _companyLocation.Id);
             Assert.IsNotNull(companyLocationPoco);
             Assert.AreEqual(_companyLocation.Id, companyLocationPoco.Id);
@@ -770,10 +1074,9 @@ namespace CareerCloud.UnitTests.Assignment2
             Assert.AreEqual(_companyLocation.PostalCode.PadRight(20), companyLocationPoco.PostalCode);
         }
 
-        private void CompanyJobDescriptionAdd()
+        private void CompanyJobDescriptionCheck()
         {
             CompanyJobDescriptionRepository companyJobDescRepo = new CompanyJobDescriptionRepository();
-            companyJobDescRepo.Add(new CompanyJobDescriptionPoco[] { _companyJobDescription });
             CompanyJobDescriptionPoco companyJobDescPoco = companyJobDescRepo.GetSingle(t => t.Id == _companyJobDescription.Id);
             Assert.IsNotNull(companyJobDescPoco);
             Assert.AreEqual(_companyJobDescription.Id, companyJobDescPoco.Id);
@@ -782,10 +1085,9 @@ namespace CareerCloud.UnitTests.Assignment2
             Assert.AreEqual(_companyJobDescription.JobName, companyJobDescPoco.JobName);
         }
 
-        private void CompanyJobAdd()
+        private void CompanyJobCheck()
         {
             CompanyJobRepository companyJobRepo = new CompanyJobRepository();
-            companyJobRepo.Add(new CompanyJobPoco[] { _companyJob });
             CompanyJobPoco companyJobPoco = companyJobRepo.GetSingle(t => t.Id == _companyJob.Id);
             Assert.IsNotNull(companyJobPoco);
             Assert.AreEqual(_companyJob.Id, companyJobPoco.Id);
@@ -795,10 +1097,9 @@ namespace CareerCloud.UnitTests.Assignment2
             Assert.AreEqual(_companyJob.IsCompanyHidden, companyJobPoco.IsCompanyHidden);
         }
 
-        private void CompanyDescriptionAdd()
+        private void CompanyDescriptionCheck()
         {
             CompanyDescriptionRepository companyDescriptionRepo = new CompanyDescriptionRepository();
-            companyDescriptionRepo.Add(new CompanyDescriptionPoco[] { _companyDescription });
             CompanyDescriptionPoco companyDescriptionPoco = companyDescriptionRepo.GetSingle(t => t.Id == _companyDescription.Id);
             Assert.IsNotNull(companyDescriptionPoco);
             Assert.AreEqual(_companyDescription.Id, companyDescriptionPoco.Id);
@@ -808,10 +1109,10 @@ namespace CareerCloud.UnitTests.Assignment2
             Assert.AreEqual(_companyDescription.Company, companyDescriptionPoco.Company);
         }
 
-        private void CompanyProfileAdd()
+
+        public void CompanyProfileCheck()
         {
-            CompanyProfleRepository companyProfileRepo = new CompanyProfleRepository();
-            companyProfileRepo.Add(new CompanyProfilePoco[] { _companyProfile });
+            CompanyProfileRepository companyProfileRepo = new CompanyProfileRepository();
             CompanyProfilePoco companyProfilePoco = companyProfileRepo.GetSingle(t => t.Id == _companyProfile.Id);
             Assert.IsNotNull(companyProfilePoco);
             Assert.AreEqual(_companyProfile.CompanyWebsite, companyProfilePoco.CompanyWebsite);
@@ -821,22 +1122,6 @@ namespace CareerCloud.UnitTests.Assignment2
             Assert.AreEqual(_companyProfile.Id, companyProfilePoco.Id);
         }
 
-        private void SystemLanguageCodeAdd()
-        {
-            SystemLanguageCodeRepository systemLanguageCodeRepo = new SystemLanguageCodeRepository();
-            systemLanguageCodeRepo.Add(new SystemLanguageCodePoco[] { _systemLangCode });
-        }
-
-        private void SystemCountryCodeAdd()
-        {
-            SystemCountryCodeRepository systemCountryCodeRepository = new SystemCountryCodeRepository();
-            systemCountryCodeRepository.Add(new SystemCountryCodePoco[] { _systemCountry });
-        }
-
-        #endregion AddImplementation
-
-
-        #region CheckImplementation
         private void ApplicantWorkHistoryCheck()
         {
             ApplicantWorkHistoryRepository applicantWorkHistoryRepository = new ApplicantWorkHistoryRepository();
