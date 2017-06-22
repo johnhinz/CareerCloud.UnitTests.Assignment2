@@ -80,9 +80,9 @@ namespace CareerCloud.UnitTests.Assignment2
             Assert.IsTrue(_types.Any(t => t.Name == "CompanyJobSkillRepository"));
             Assert.IsTrue(_types.Any(t => t.Name == "CompanyLocationRepository"));
             Assert.IsTrue(_types.Any(t => t.Name == "CompanyProfileRepository"));
-            Assert.IsTrue(_types.Any(t => t.Name == "SecurityLoginLogRepository"));
+            Assert.IsTrue(_types.Any(t => t.Name == "SecurityLoginsLogRepository"));
             Assert.IsTrue(_types.Any(t => t.Name == "SecurityLoginRepository"));
-            Assert.IsTrue(_types.Any(t => t.Name == "SecurityLoginRoleRepository"));
+            Assert.IsTrue(_types.Any(t => t.Name == "SecurityLoginsRoleRepository"));
             Assert.IsTrue(_types.Any(t => t.Name == "SecurityRoleRepository"));
             Assert.IsTrue(_types.Any(t => t.Name == "SystemCountryCodeRepository"));
             Assert.IsTrue(_types.Any(t => t.Name == "SystemLanguageCodeRepository"));
@@ -574,7 +574,7 @@ namespace CareerCloud.UnitTests.Assignment2
             _securityLoginLog.IsSuccesful = false;
             _securityLoginLog.LogonDate = Faker.Date.PastWithTime();
             _securityLoginLog.SourceIP = Faker.Internet.IPv4().PadRight(15);
-            SecurityLoginLogRepository repo = new SecurityLoginLogRepository();
+            SecurityLoginsLogRepository repo = new SecurityLoginsLogRepository();
             repo.Update(new SecurityLoginsLogPoco[] { _securityLoginLog });
         }
 
@@ -734,7 +734,7 @@ namespace CareerCloud.UnitTests.Assignment2
 
         private void SecurityLoginLogRemove()
         {
-            SecurityLoginLogRepository securityLoginLogRepository = new SecurityLoginLogRepository();
+            SecurityLoginsLogRepository securityLoginLogRepository = new SecurityLoginsLogRepository();
             securityLoginLogRepository.Remove(new SecurityLoginsLogPoco[] { _securityLoginLog });
             Assert.IsNull(securityLoginLogRepository.GetSingle(t => t.Id == _securityLoginLog.Id));
         }
@@ -748,7 +748,7 @@ namespace CareerCloud.UnitTests.Assignment2
 
         private void SecurityLoginRoleRemove()
         {
-            SecurityLoginRoleRepository securityLoginRoleRepository = new SecurityLoginRoleRepository();
+            SecurityLoginsRoleRepository securityLoginRoleRepository = new SecurityLoginsRoleRepository();
             securityLoginRoleRepository.Remove(new SecurityLoginsRolePoco[] { _securityLoginRole });
             Assert.IsNull(securityLoginRoleRepository.GetSingle(t => t.Id == _securityLoginRole.Id));
         }
@@ -837,7 +837,7 @@ namespace CareerCloud.UnitTests.Assignment2
 
         private void SecurityLoginRoleAdd()
         {
-            SecurityLoginRoleRepository securityLoginRoleRepository = new SecurityLoginRoleRepository();
+            SecurityLoginsRoleRepository securityLoginRoleRepository = new SecurityLoginsRoleRepository();
             securityLoginRoleRepository.Add(new SecurityLoginsRolePoco[] { _securityLoginRole });
         }
 
@@ -849,7 +849,7 @@ namespace CareerCloud.UnitTests.Assignment2
 
         private void SecurityLoginLogAdd()
         {
-            SecurityLoginLogRepository securityLoginLogRepository = new SecurityLoginLogRepository();
+            SecurityLoginsLogRepository securityLoginLogRepository = new SecurityLoginsLogRepository();
             securityLoginLogRepository.Add(new SecurityLoginsLogPoco[] { _securityLoginLog });
         }
 
@@ -987,7 +987,7 @@ namespace CareerCloud.UnitTests.Assignment2
 
         private void SecurityLoginRoleCheck()
         {
-            SecurityLoginRoleRepository securityLoginRoleRepository = new SecurityLoginRoleRepository();
+            SecurityLoginsRoleRepository securityLoginRoleRepository = new SecurityLoginsRoleRepository();
             SecurityLoginsRolePoco securityLoginsRolePoco = securityLoginRoleRepository.GetSingle(t => t.Id == _securityLoginRole.Id);
             Assert.IsNotNull(securityLoginsRolePoco);
             Assert.AreEqual(_securityLoginRole.Id, securityLoginsRolePoco.Id);
@@ -1007,7 +1007,7 @@ namespace CareerCloud.UnitTests.Assignment2
 
         private void SecurityLoginLogCheck()
         {
-            SecurityLoginLogRepository securityLoginLogRepository = new SecurityLoginLogRepository();
+            SecurityLoginsLogRepository securityLoginLogRepository = new SecurityLoginsLogRepository();
             SecurityLoginsLogPoco securityLoginsLogPoco = securityLoginLogRepository.GetSingle(t => t.Id == _securityLoginLog.Id);
             Assert.IsNotNull(securityLoginsLogPoco);
             Assert.AreEqual(_securityLoginLog.Id, securityLoginsLogPoco.Id);
