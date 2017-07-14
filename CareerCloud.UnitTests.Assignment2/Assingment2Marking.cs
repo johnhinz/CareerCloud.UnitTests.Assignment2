@@ -36,6 +36,8 @@ namespace CareerCloud.UnitTests.Assignment2
 
         private Type[] _types;
 
+        private DatabaseConstraints _databaseConstraints;
+
         [TestInitialize]
         public void Init_Pocos()
         {
@@ -61,6 +63,9 @@ namespace CareerCloud.UnitTests.Assignment2
             ApplicantSkills_Init();
             AappliantWorkHistory_Init();
             ApplicantJobApplication_Init();
+
+            _databaseConstraints = new DatabaseConstraints();
+            _databaseConstraints.DisableAll();
         }
 
         #region DTOCreation
@@ -477,6 +482,195 @@ namespace CareerCloud.UnitTests.Assignment2
 
             #endregion
         }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_SystemCountryCodeRepository()
+        {
+            SystemCountryCodeAdd();
+            SystemCountryCodeCheck();
+            SystemCountryCodeUpdate();
+            SystemCountryCodeCheck();
+            SystemCountryCodeRemove();
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_SystemLanguageCodeRepository()
+        {
+            SystemLanguageCodeAdd();
+            SystemLanguageCodeCheck();
+            SystemLanguageCodeUpdate();
+            SystemLanguageCodeCheck();
+            SystemLanguageCodeRemove();
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_CompanyProfileRepository()
+        {
+            CompanyProfileAdd();
+            CompanyProfileCheck();
+            CompanyProfileUpdate();
+            CompanyProfileCheck();
+            CompanyProfileRemove();
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_CompanyDescriptionRepository()
+        {
+            CompanyDescriptionAdd();
+            CompanyDescriptionCheck();
+            CompanyDescriptionUpdate();
+            CompanyDescriptionCheck();
+            CompanyDescriptionRemove();
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_CompanyJobRepository()
+        {
+            CompanyJobAdd();
+            CompanyJobCheck();
+            CompanyJobUpdate();
+            CompanyJobCheck();
+            CompanyJobRemove();
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_CompanyJobDescriptionRepository()
+        {
+            CompanyJobDescriptionAdd();
+            CompanyJobDescriptionCheck();
+            CompanyJobDescriptionUpdate();
+            CompanyJobDescriptionCheck();
+            CompanyJobDescRemove();
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_CompanyLocationRepository()
+        {
+            CompanyLocationAdd();
+            CompanyLocationCheck();
+            CompanyLocationUpdate();
+            CompanyLocationCheck();
+            CompanyLocationRemove();
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_CompanyJobEducationRepository()
+        {
+            CompanyJobEducationAdd();
+            CompanyJobEducationCheck();
+            CompanyJobEducationUpdate();
+            CompanyJobEducationCheck();
+            CompanyJobEducationRemove();
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_CompanyJobSkillRepository()
+        {
+            CompanyJobSkillAdd();
+            CompanyJobSkillCheck();
+            CompanyJobSkillUpdate();
+            CompanyJobSkillCheck();
+            CompanyJobSkillRemove();
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_SecurityLoginRepository()
+        {
+            SecurityLoginAdd();
+            SecurityLoginCheck();
+            SecurityLoginUpdate();
+            SecurityLoginCheck();
+            SecurityLoginRemove();
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_SecurityLoginLogRepository()
+        {
+            SecurityLoginLogAdd();
+            SecurityLoginLogCheck();
+            SecurityLoginLogUpdate();
+            SecurityLoginLogCheck();
+            SecurityLoginLogRemove();
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_SecurityRoleRepository()
+        {
+            SecurityRoleAdd();
+            SecurityRoleCheck();
+            SecurityRoleUpdate();
+            SecurityRoleCheck();
+            SecurityRoleRemove();
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_SecurityLoginRoleRepository()
+        {
+            SecurityLoginRoleAdd();
+            SecurityLoginRoleCheck();
+            SecurityLoginRoleRemove();
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_ApplicantProfileRepository()
+        {
+            ApplicantProfileAdd();
+            ApplicantProfileCheck();
+            ApplicantProfileUpdate();
+            ApplicantProfileCheck();
+            ApplicantProfileRemove();
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_ApplicantEducationRepository()
+        {
+            ApplicantEducationAdd();
+            ApplicantEducationCheck();
+            ApplicantEducationUpdate();
+            ApplicantEducationCheck();
+            ApplicantEducationRemove();
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_ApplicantJobApplicationRepository()
+        {
+            ApplicantJobApplicationAdd();
+            ApplicantJobApplicationCheck();
+            ApplicantJobApplicationUpdate();
+            ApplicantJobApplicationCheck();
+            ApplicantJobApplicationRemove();
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_ApplicantResumeRepository()
+        {
+            ApplicantResumeAdd();
+            ApplicantResumeCheck();
+            ApplicantResumeUpdate();
+            ApplicantResumeCheck();
+            ApplicantResumeRemove();
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_ApplicantSkillRepository()
+        {
+            ApplicantSkillAdd();
+            ApplicantSkillCheck();
+            ApplicantSkillUpdate();
+            ApplicantSkillCheck();
+            ApplicantSkillRemove();
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_ApplicantWorkHistoryRepository()
+        {
+            ApplicantWorkHistoryAdd();
+            ApplicantWorkHistoryCheck();
+            ApplicantWorkHistoryUpdate();
+            ApplicantWorkHistoryCheck();
+            ApplicantWorkHistoryRemove();
+        }
+
 
         #region UpdateImplementation
         public void CompanyProfileUpdate()
@@ -1166,6 +1360,12 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             if (string.IsNullOrEmpty(str)) return str;
             return str.Length <= maxLength ? str : str.Substring(0, maxLength);
+        }
+
+        [TestCleanup()]
+        public void Cleanup()
+        {
+            _databaseConstraints.EnableAll();
         }
     }
 
