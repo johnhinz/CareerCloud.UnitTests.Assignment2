@@ -11,7 +11,6 @@ namespace CareerCloud.UnitTests.Assignment2
     [TestClass]
     public class Assingment2Marking
     {
-
         private const string _assemblyUnderTest = "CareerCloud.ADODataAccessLayer.dll";
 
         private SystemCountryCodePoco _systemCountry;
@@ -39,6 +38,12 @@ namespace CareerCloud.UnitTests.Assignment2
         [TestInitialize]
         public void Init_Pocos()
         {
+            //Disable foreign key constraints on all tables.
+            //This makes your code immune to any foreign key constraint
+            //violations when executing DML queries in random order on DB tables
+            FKConstraintsManipulator.DisableFKConstraintsOnAllTables();
+            
+
             ApplicantEducationRepository poco = new ApplicantEducationRepository();
             _types = Assembly.LoadFrom(_assemblyUnderTest).GetTypes();
 
@@ -61,6 +66,16 @@ namespace CareerCloud.UnitTests.Assignment2
             ApplicantSkills_Init();
             AappliantWorkHistory_Init();
             ApplicantJobApplication_Init();
+        }
+
+        /// <summary>
+        /// This method is called by the test runner after a test finishes execution, 
+        /// regardless of whether that test succeeded, failed or threw an exception
+        /// </summary>
+        [TestCleanup]
+        public void Teardown_Test()
+        {
+            FKConstraintsManipulator.EnableFKConstraintsOnAllTables();
         }
 
         #region DTOCreation
