@@ -37,7 +37,7 @@ namespace CareerCloud.UnitTests.Assignment2
 
         private Type[] _types;
 
-        private DatabaseConstraints _databaseConstraints;
+        private DatabaseConstraints _dbConstraints;
 
         [TestInitialize]
         public void Init_Pocos()
@@ -65,8 +65,7 @@ namespace CareerCloud.UnitTests.Assignment2
             AappliantWorkHistory_Init();
             ApplicantJobApplication_Init();
 
-            _databaseConstraints = new DatabaseConstraints();
-           // _databaseConstraints.DisableAll();
+            _dbConstraints = new DatabaseConstraints();
         }
 
         #region DTOCreation
@@ -359,143 +358,19 @@ namespace CareerCloud.UnitTests.Assignment2
                 }
             }
         }
-        /*
-        [TestMethod]
-        public void Assignment2_DeepDive_CRUD_Test()
-        {
-            SystemCountryCodeAdd();
-            SystemCountryCodeCheck();
-            SystemCountryCodeUpdate();
-            SystemCountryCodeCheck();
-
-            SystemLanguageCodeAdd();
-            SystemLanguageCodeCheck();
-            SystemLanguageCodeUpdate();
-            SystemLanguageCodeCheck();
-
-            CompanyProfileAdd();
-            CompanyProfileCheck();
-            CompanyProfileUpdate();
-            CompanyProfileCheck();
-
-            CompanyDescriptionAdd();
-            CompanyDescriptionCheck();
-            CompanyDescriptionUpdate();
-            CompanyDescriptionCheck();
-
-            CompanyJobAdd();
-            CompanyJobCheck();
-            CompanyJobUpdate();
-            CompanyJobCheck();
-
-            CompanyJobDescriptionAdd();
-            CompanyJobDescriptionCheck();
-            CompanyJobDescriptionUpdate();
-            CompanyJobDescriptionCheck();
-
-            CompanyLocationAdd();
-            CompanyLocationCheck();
-            CompanyLocationUpdate();
-            CompanyLocationCheck();
-
-            CompanyJobEducationAdd();
-            CompanyJobEducationCheck();
-            CompanyJobEducationUpdate();
-            CompanyJobEducationCheck();
-
-            CompanyJobSkillAdd();
-            CompanyJobSkillCheck();
-            CompanyJobSkillUpdate();
-            CompanyJobSkillCheck();
-
-            SecurityLoginAdd();
-            SecurityLoginCheck();
-            SecurityLoginUpdate();
-            SecurityLoginCheck();
-
-            SecurityLoginLogAdd();
-            SecurityLoginLogCheck();
-            SecurityLoginLogUpdate();
-            SecurityLoginLogCheck();
-
-            SecurityRoleAdd();
-            SecurityRoleCheck();
-            SecurityRoleUpdate();
-            SecurityRoleCheck();
-
-            SecurityLoginRoleAdd();
-            SecurityLoginRoleCheck();
-
-            ApplicantProfileAdd();
-            ApplicantProfileCheck();
-            ApplicantProfileUpdate();
-            ApplicantProfileCheck();
-
-            ApplicantEducationAdd();
-            ApplicantEducationCheck();
-            ApplicantEducationUpdate();
-            ApplicantEducationCheck();
-
-            ApplicantJobApplicationAdd();
-            ApplicantJobApplicationCheck();
-            ApplicantJobApplicationUpdate();
-            ApplicantJobApplicationCheck();
-
-            ApplicantResumeAdd();
-            ApplicantResumeCheck();
-            ApplicantResumeUpdate();
-            ApplicantResumeCheck();
-
-            ApplicantSkillAdd();
-            ApplicantSkillCheck();
-            ApplicantSkillUpdate();
-            ApplicantSkillCheck();
-
-            ApplicantWorkHistoryAdd();
-            ApplicantWorkHistoryCheck();
-            ApplicantWorkHistoryUpdate();
-            ApplicantWorkHistoryCheck();
-
-            #region Cleanup
-            ApplicantWorkHistoryRemove();
-            ApplicantSkillRemove();
-            ApplicantResumeRemove();
-
-            ApplicantJobApplicationRemove();
-            ApplicantEducationRemove();
-            ApplicantProfileRemove();
-
-            SecurityLoginRoleRemove();
-            SecurityRoleRemove();
-            SecurityLoginLogRemove();
-            SecurityLoginRemove();
-
-            CompanyJobSkillRemove();
-            CompanyJobEducationRemove();
-            CompanyLocationRemove();
-            CompanyJobDescRemove();
-            CompanyJobRemove();
-            CompanyDescriptionRemove();
-            CompanyProfileRemove();
-
-            SystemLanguageCodeRemove();
-            SystemCountryCodeRemove();
-
-            #endregion
-        }
-        */
+        
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_SystemCountryCodeRepository()
         {
             using (TransactionScope Scope = new TransactionScope())
             {
-                _databaseConstraints.DisableConstraintsForPoco(_systemCountry.GetType());
+                _dbConstraints.DisableConstraintsForPoco(_systemCountry.GetType());
                 SystemCountryCodeAdd();
                 SystemCountryCodeCheck();
                 SystemCountryCodeUpdate();
                 SystemCountryCodeCheck();
                 SystemCountryCodeRemove();
-                _databaseConstraints.EnableConstraintsForPoco(_systemCountry.GetType());
+                _dbConstraints.EnableConstraintsForPoco(_systemCountry.GetType());
             }
         }
 
@@ -504,13 +379,13 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             using (TransactionScope Scope = new TransactionScope())
             {
-                _databaseConstraints.DisableConstraintsForPoco(_systemLangCode.GetType());
+                _dbConstraints.DisableConstraintsForPoco(_systemLangCode.GetType());
                 SystemLanguageCodeAdd();
                 SystemLanguageCodeCheck();
                 SystemLanguageCodeUpdate();
                 SystemLanguageCodeCheck();
                 SystemLanguageCodeRemove();
-                _databaseConstraints.EnableConstraintsForPoco(_systemLangCode.GetType());
+                _dbConstraints.EnableConstraintsForPoco(_systemLangCode.GetType());
             }
         }
 
@@ -519,13 +394,13 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             using (TransactionScope Scope = new TransactionScope())
             {
-                _databaseConstraints.DisableConstraintsForPoco(_companyProfile.GetType());
+                _dbConstraints.DisableConstraintsForPoco(_companyProfile.GetType());
                 CompanyProfileAdd();
                 CompanyProfileCheck();
                 CompanyProfileUpdate();
                 CompanyProfileCheck();
                 CompanyProfileRemove();
-                _databaseConstraints.EnableConstraintsForPoco(_companyProfile.GetType());
+                _dbConstraints.EnableConstraintsForPoco(_companyProfile.GetType());
             }
         }
 
@@ -534,13 +409,13 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             using (TransactionScope Scope = new TransactionScope())
             {
-                _databaseConstraints.DisableConstraintsForPoco(_companyDescription.GetType());
+                _dbConstraints.DisableConstraintsForPoco(_companyDescription.GetType());
                 CompanyDescriptionAdd();
                 CompanyDescriptionCheck();
                 CompanyDescriptionUpdate();
                 CompanyDescriptionCheck();
                 CompanyDescriptionRemove();
-                _databaseConstraints.EnableConstraintsForPoco(_companyDescription.GetType());
+                _dbConstraints.EnableConstraintsForPoco(_companyDescription.GetType());
             }
         }
 
@@ -549,13 +424,13 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             using (TransactionScope Scope = new TransactionScope())
             {
-                _databaseConstraints.DisableConstraintsForPoco(_companyJob.GetType());
+                _dbConstraints.DisableConstraintsForPoco(_companyJob.GetType());
                 CompanyJobAdd();
                 CompanyJobCheck();
                 CompanyJobUpdate();
                 CompanyJobCheck();
                 CompanyJobRemove();
-                _databaseConstraints.EnableConstraintsForPoco(_companyJob.GetType());
+                _dbConstraints.EnableConstraintsForPoco(_companyJob.GetType());
             }
         }
 
@@ -564,13 +439,13 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             using (TransactionScope Scope = new TransactionScope())
             {
-                _databaseConstraints.DisableConstraintsForPoco(_companyJobDescription.GetType());
+                _dbConstraints.DisableConstraintsForPoco(_companyJobDescription.GetType());
                 CompanyJobDescriptionAdd();
                 CompanyJobDescriptionCheck();
                 CompanyJobDescriptionUpdate();
                 CompanyJobDescriptionCheck();
                 CompanyJobDescRemove();
-                _databaseConstraints.EnableConstraintsForPoco(_companyJobDescription.GetType());
+                _dbConstraints.EnableConstraintsForPoco(_companyJobDescription.GetType());
             }
         }
 
@@ -579,13 +454,13 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             using (TransactionScope Scope = new TransactionScope())
             {
-                _databaseConstraints.DisableConstraintsForPoco(_companyLocation.GetType());
+                _dbConstraints.DisableConstraintsForPoco(_companyLocation.GetType());
                 CompanyLocationAdd();
                 CompanyLocationCheck();
                 CompanyLocationUpdate();
                 CompanyLocationCheck();
                 CompanyLocationRemove();
-                _databaseConstraints.EnableConstraintsForPoco(_companyLocation.GetType());
+                _dbConstraints.EnableConstraintsForPoco(_companyLocation.GetType());
             }
         }
 
@@ -594,13 +469,13 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             using (TransactionScope Scope = new TransactionScope())
             {
-                _databaseConstraints.DisableConstraintsForPoco(_companyJobEducation.GetType());
+                _dbConstraints.DisableConstraintsForPoco(_companyJobEducation.GetType());
                 CompanyJobEducationAdd();
                 CompanyJobEducationCheck();
                 CompanyJobEducationUpdate();
                 CompanyJobEducationCheck();
                 CompanyJobEducationRemove();
-                _databaseConstraints.EnableConstraintsForPoco(_companyJobEducation.GetType());
+                _dbConstraints.EnableConstraintsForPoco(_companyJobEducation.GetType());
             }
         }
 
@@ -609,13 +484,13 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             using (TransactionScope Scope = new TransactionScope())
             {
-                _databaseConstraints.DisableConstraintsForPoco(_companyJobSkill.GetType());
+                _dbConstraints.DisableConstraintsForPoco(_companyJobSkill.GetType());
                 CompanyJobSkillAdd();
                 CompanyJobSkillCheck();
                 CompanyJobSkillUpdate();
                 CompanyJobSkillCheck();
                 CompanyJobSkillRemove();
-                _databaseConstraints.EnableConstraintsForPoco(_companyJobSkill.GetType());
+                _dbConstraints.EnableConstraintsForPoco(_companyJobSkill.GetType());
             }
         }
 
@@ -624,13 +499,13 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             using (TransactionScope Scope = new TransactionScope())
             {
-                _databaseConstraints.DisableConstraintsForPoco(_securityLogin.GetType());
+                _dbConstraints.DisableConstraintsForPoco(_securityLogin.GetType());
                 SecurityLoginAdd();
                 SecurityLoginCheck();
                 SecurityLoginUpdate();
                 SecurityLoginCheck();
                 SecurityLoginRemove();
-                _databaseConstraints.EnableConstraintsForPoco(_securityLogin.GetType());
+                _dbConstraints.EnableConstraintsForPoco(_securityLogin.GetType());
             }
         }
 
@@ -639,13 +514,13 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             using (TransactionScope Scope = new TransactionScope())
             {
-                _databaseConstraints.DisableConstraintsForPoco(_securityLoginLog.GetType());
+                _dbConstraints.DisableConstraintsForPoco(_securityLoginLog.GetType());
                 SecurityLoginLogAdd();
                 SecurityLoginLogCheck();
                 SecurityLoginLogUpdate();
                 SecurityLoginLogCheck();
                 SecurityLoginLogRemove();
-                _databaseConstraints.EnableConstraintsForPoco(_securityLoginLog.GetType());
+                _dbConstraints.EnableConstraintsForPoco(_securityLoginLog.GetType());
             }
         }
 
@@ -654,13 +529,13 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             using (TransactionScope Scope = new TransactionScope())
             {
-                _databaseConstraints.DisableConstraintsForPoco(_securityRole.GetType());
+                _dbConstraints.DisableConstraintsForPoco(_securityRole.GetType());
                 SecurityRoleAdd();
                 SecurityRoleCheck();
                 SecurityRoleUpdate();
                 SecurityRoleCheck();
                 SecurityRoleRemove();
-                _databaseConstraints.EnableConstraintsForPoco(_securityRole.GetType());
+                _dbConstraints.EnableConstraintsForPoco(_securityRole.GetType());
             }
         }
 
@@ -669,11 +544,11 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             using (TransactionScope Scope = new TransactionScope())
             {
-                _databaseConstraints.DisableConstraintsForPoco(_securityLoginRole.GetType());
+                _dbConstraints.DisableConstraintsForPoco(_securityLoginRole.GetType());
                 SecurityLoginRoleAdd();
                 SecurityLoginRoleCheck();
                 SecurityLoginRoleRemove();
-                _databaseConstraints.EnableConstraintsForPoco(_securityLoginRole.GetType());
+                _dbConstraints.EnableConstraintsForPoco(_securityLoginRole.GetType());
             }
         }
 
@@ -682,13 +557,13 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             using (TransactionScope Scope = new TransactionScope())
             {
-                _databaseConstraints.DisableConstraintsForPoco(_applicantProfile.GetType());
+                _dbConstraints.DisableConstraintsForPoco(_applicantProfile.GetType());
                 ApplicantProfileAdd();
                 ApplicantProfileCheck();
                 ApplicantProfileUpdate();
                 ApplicantProfileCheck();
                 ApplicantProfileRemove();
-                _databaseConstraints.EnableConstraintsForPoco(_applicantProfile.GetType());
+                _dbConstraints.EnableConstraintsForPoco(_applicantProfile.GetType());
             }
         }
 
@@ -697,13 +572,13 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             using (TransactionScope Scope = new TransactionScope())
             {             
-                _databaseConstraints.DisableConstraintsForPoco(_applicantEducation.GetType());
+                _dbConstraints.DisableConstraintsForPoco(_applicantEducation.GetType());
                 ApplicantEducationAdd();
                 ApplicantEducationCheck();
                 ApplicantEducationUpdate();
                 ApplicantEducationCheck();
                 ApplicantEducationRemove();
-                _databaseConstraints.EnableConstraintsForPoco(_applicantEducation.GetType());               
+                _dbConstraints.EnableConstraintsForPoco(_applicantEducation.GetType());               
             }           
         }
 
@@ -712,13 +587,13 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             using (TransactionScope Scope = new TransactionScope())
             {
-                _databaseConstraints.DisableConstraintsForPoco(_applicantJobApplication.GetType());
+                _dbConstraints.DisableConstraintsForPoco(_applicantJobApplication.GetType());
                 ApplicantJobApplicationAdd();
                 ApplicantJobApplicationCheck();
                 ApplicantJobApplicationUpdate();
                 ApplicantJobApplicationCheck();
                 ApplicantJobApplicationRemove();
-                _databaseConstraints.EnableConstraintsForPoco(_applicantJobApplication.GetType());
+                _dbConstraints.EnableConstraintsForPoco(_applicantJobApplication.GetType());
             }
         }
 
@@ -727,13 +602,13 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             using (TransactionScope Scope = new TransactionScope())
             {
-                _databaseConstraints.DisableConstraintsForPoco(_applicantResume.GetType());
+                _dbConstraints.DisableConstraintsForPoco(_applicantResume.GetType());
                 ApplicantResumeAdd();
                 ApplicantResumeCheck();
                 ApplicantResumeUpdate();
                 ApplicantResumeCheck();
                 ApplicantResumeRemove();
-                _databaseConstraints.EnableConstraintsForPoco(_applicantResume.GetType());
+                _dbConstraints.EnableConstraintsForPoco(_applicantResume.GetType());
             }
         }
 
@@ -742,13 +617,13 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             using (TransactionScope Scope = new TransactionScope())
             {
-                _databaseConstraints.DisableConstraintsForPoco(_applicantSkills.GetType());
+                _dbConstraints.DisableConstraintsForPoco(_applicantSkills.GetType());
                 ApplicantSkillAdd();
                 ApplicantSkillCheck();
                 ApplicantSkillUpdate();
                 ApplicantSkillCheck();
                 ApplicantSkillRemove();
-                _databaseConstraints.EnableConstraintsForPoco(_applicantSkills.GetType());
+                _dbConstraints.EnableConstraintsForPoco(_applicantSkills.GetType());
             }
         }
 
@@ -757,13 +632,13 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             using (TransactionScope Scope = new TransactionScope())
             {
-                _databaseConstraints.DisableConstraintsForPoco(_appliantWorkHistory.GetType());
+                _dbConstraints.DisableConstraintsForPoco(_appliantWorkHistory.GetType());
                 ApplicantWorkHistoryAdd();
                 ApplicantWorkHistoryCheck();
                 ApplicantWorkHistoryUpdate();
                 ApplicantWorkHistoryCheck();
                 ApplicantWorkHistoryRemove();
-                _databaseConstraints.EnableConstraintsForPoco(_appliantWorkHistory.GetType());
+                _dbConstraints.EnableConstraintsForPoco(_appliantWorkHistory.GetType());
             }
         }
 
@@ -1456,13 +1331,6 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             if (string.IsNullOrEmpty(str)) return str;
             return str.Length <= maxLength ? str : str.Substring(0, maxLength);
-        }
-
-        [TestCleanup()]
-        public void Cleanup()
-        {
-           // _databaseConstraints.EnableAll();
-        }
+        }      
     }
-
 }

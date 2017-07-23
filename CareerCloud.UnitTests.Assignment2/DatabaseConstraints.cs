@@ -20,17 +20,6 @@ namespace CareerCloud.UnitTests.Assignment2
             _connStr = ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
         }
 
-        public void DisableAll()
-        {
-            ExecuteCommandForEachTable("ALTER TABLE ? NOCHECK CONSTRAINT all");
-           
-        }
-
-        public void EnableAll()
-        {
-            ExecuteCommandForEachTable("ALTER TABLE ? WITH CHECK CHECK CONSTRAINT all"); 
-        }
-
         public void DisableConstraintsForPoco(Type pocoType)
         {
             AlterConstraintsForPoco(pocoType, " NOCHECK CONSTRAINT ALL");
@@ -41,19 +30,6 @@ namespace CareerCloud.UnitTests.Assignment2
             AlterConstraintsForPoco(pocoType, " WITH CHECK CHECK CONSTRAINT ALL");           
         }
 
-        private void ExecuteCommandForEachTable(string command)
-        {
-            using (SqlConnection conn = new SqlConnection(_connStr))
-            {
-                using (SqlCommand cmd = new SqlCommand("sp_msforeachtable", conn))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter("@command1", command));
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
         private void AlterConstraintsForPoco(Type pocoType, string alterOption)
         {
             string tableName;
