@@ -48,7 +48,10 @@
       <HintPath>..\packages\MSTest.TestFramework.1.1.18\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Transactions" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assingment2Marking.cs" />
@@ -58,6 +61,20 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CareerCloud.ADODataAccessLayer\CareerCloud.ADODataAccessLayer.csproj">
+      <Project>{284facfa-966e-4016-8a39-a92c0637b3d2}</Project>
+      <Name>CareerCloud.ADODataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CareerCloud.DataAccessLayer\CareerCloud.DataAccessLayer.csproj">
+      <Project>{95844af3-bc02-4e5f-860e-96b18e541c21}</Project>
+      <Name>CareerCloud.DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CareerCloud.Pocos\CareerCloud.Pocos.csproj">
+      <Project>{facb9a11-546f-4a1e-b20b-df66a299f246}</Project>
+      <Name>CareerCloud.Pocos</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

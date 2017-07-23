@@ -4,6 +4,7 @@ using CareerCloud.ADODataAccessLayer;
 using CareerCloud.Pocos;
 using System.Reflection;
 using System.Linq;
+using System.Transactions;
 
 namespace CareerCloud.UnitTests.Assignment2
 {
@@ -358,7 +359,7 @@ namespace CareerCloud.UnitTests.Assignment2
                 }
             }
         }
-
+        /*
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test()
         {
@@ -482,193 +483,250 @@ namespace CareerCloud.UnitTests.Assignment2
 
             #endregion
         }
-
+        */
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_SystemCountryCodeRepository()
         {
-            SystemCountryCodeAdd();
-            SystemCountryCodeCheck();
-            SystemCountryCodeUpdate();
-            SystemCountryCodeCheck();
-            SystemCountryCodeRemove();
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                SystemCountryCodeAdd();
+                SystemCountryCodeCheck();
+                SystemCountryCodeUpdate();
+                SystemCountryCodeCheck();
+                SystemCountryCodeRemove();
+            }
         }
 
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_SystemLanguageCodeRepository()
         {
-            SystemLanguageCodeAdd();
-            SystemLanguageCodeCheck();
-            SystemLanguageCodeUpdate();
-            SystemLanguageCodeCheck();
-            SystemLanguageCodeRemove();
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                SystemLanguageCodeAdd();
+                SystemLanguageCodeCheck();
+                SystemLanguageCodeUpdate();
+                SystemLanguageCodeCheck();
+                SystemLanguageCodeRemove();
+            }
         }
 
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_CompanyProfileRepository()
         {
-            CompanyProfileAdd();
-            CompanyProfileCheck();
-            CompanyProfileUpdate();
-            CompanyProfileCheck();
-            CompanyProfileRemove();
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                CompanyProfileAdd();
+                CompanyProfileCheck();
+                CompanyProfileUpdate();
+                CompanyProfileCheck();
+                CompanyProfileRemove();
+            }
         }
 
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_CompanyDescriptionRepository()
         {
-            CompanyDescriptionAdd();
-            CompanyDescriptionCheck();
-            CompanyDescriptionUpdate();
-            CompanyDescriptionCheck();
-            CompanyDescriptionRemove();
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                CompanyDescriptionAdd();
+                CompanyDescriptionCheck();
+                CompanyDescriptionUpdate();
+                CompanyDescriptionCheck();
+                CompanyDescriptionRemove();
+            }
         }
 
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_CompanyJobRepository()
         {
-            CompanyJobAdd();
-            CompanyJobCheck();
-            CompanyJobUpdate();
-            CompanyJobCheck();
-            CompanyJobRemove();
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                CompanyJobAdd();
+                CompanyJobCheck();
+                CompanyJobUpdate();
+                CompanyJobCheck();
+                CompanyJobRemove();
+            }
         }
 
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_CompanyJobDescriptionRepository()
         {
-            CompanyJobDescriptionAdd();
-            CompanyJobDescriptionCheck();
-            CompanyJobDescriptionUpdate();
-            CompanyJobDescriptionCheck();
-            CompanyJobDescRemove();
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                CompanyJobDescriptionAdd();
+                CompanyJobDescriptionCheck();
+                CompanyJobDescriptionUpdate();
+                CompanyJobDescriptionCheck();
+                CompanyJobDescRemove();
+            }
         }
 
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_CompanyLocationRepository()
         {
-            CompanyLocationAdd();
-            CompanyLocationCheck();
-            CompanyLocationUpdate();
-            CompanyLocationCheck();
-            CompanyLocationRemove();
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                CompanyLocationAdd();
+                CompanyLocationCheck();
+                CompanyLocationUpdate();
+                CompanyLocationCheck();
+                CompanyLocationRemove();
+            }
         }
 
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_CompanyJobEducationRepository()
         {
-            CompanyJobEducationAdd();
-            CompanyJobEducationCheck();
-            CompanyJobEducationUpdate();
-            CompanyJobEducationCheck();
-            CompanyJobEducationRemove();
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                CompanyJobEducationAdd();
+                CompanyJobEducationCheck();
+                CompanyJobEducationUpdate();
+                CompanyJobEducationCheck();
+                CompanyJobEducationRemove();
+            }
         }
 
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_CompanyJobSkillRepository()
         {
-            CompanyJobSkillAdd();
-            CompanyJobSkillCheck();
-            CompanyJobSkillUpdate();
-            CompanyJobSkillCheck();
-            CompanyJobSkillRemove();
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                CompanyJobSkillAdd();
+                CompanyJobSkillCheck();
+                CompanyJobSkillUpdate();
+                CompanyJobSkillCheck();
+                CompanyJobSkillRemove();
+            }
         }
 
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_SecurityLoginRepository()
         {
-            SecurityLoginAdd();
-            SecurityLoginCheck();
-            SecurityLoginUpdate();
-            SecurityLoginCheck();
-            SecurityLoginRemove();
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                SecurityLoginAdd();
+                SecurityLoginCheck();
+                SecurityLoginUpdate();
+                SecurityLoginCheck();
+                SecurityLoginRemove();
+            }
         }
 
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_SecurityLoginLogRepository()
         {
-            SecurityLoginLogAdd();
-            SecurityLoginLogCheck();
-            SecurityLoginLogUpdate();
-            SecurityLoginLogCheck();
-            SecurityLoginLogRemove();
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                SecurityLoginLogAdd();
+                SecurityLoginLogCheck();
+                SecurityLoginLogUpdate();
+                SecurityLoginLogCheck();
+                SecurityLoginLogRemove();
+            }
         }
 
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_SecurityRoleRepository()
         {
-            SecurityRoleAdd();
-            SecurityRoleCheck();
-            SecurityRoleUpdate();
-            SecurityRoleCheck();
-            SecurityRoleRemove();
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                SecurityRoleAdd();
+                SecurityRoleCheck();
+                SecurityRoleUpdate();
+                SecurityRoleCheck();
+                SecurityRoleRemove();
+            }
         }
 
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_SecurityLoginRoleRepository()
         {
-            SecurityLoginRoleAdd();
-            SecurityLoginRoleCheck();
-            SecurityLoginRoleRemove();
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                SecurityLoginRoleAdd();
+                SecurityLoginRoleCheck();
+                SecurityLoginRoleRemove();
+            }
         }
 
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_ApplicantProfileRepository()
         {
-            ApplicantProfileAdd();
-            ApplicantProfileCheck();
-            ApplicantProfileUpdate();
-            ApplicantProfileCheck();
-            ApplicantProfileRemove();
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                ApplicantProfileAdd();
+                ApplicantProfileCheck();
+                ApplicantProfileUpdate();
+                ApplicantProfileCheck();
+                ApplicantProfileRemove();
+            }
         }
 
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_ApplicantEducationRepository()
         {
-            ApplicantEducationAdd();
-            ApplicantEducationCheck();
-            ApplicantEducationUpdate();
-            ApplicantEducationCheck();
-            ApplicantEducationRemove();
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                ApplicantEducationAdd();
+                ApplicantEducationCheck();
+                ApplicantEducationUpdate();
+                ApplicantEducationCheck();
+                ApplicantEducationRemove();
+            }
         }
 
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_ApplicantJobApplicationRepository()
         {
-            ApplicantJobApplicationAdd();
-            ApplicantJobApplicationCheck();
-            ApplicantJobApplicationUpdate();
-            ApplicantJobApplicationCheck();
-            ApplicantJobApplicationRemove();
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                ApplicantJobApplicationAdd();
+                ApplicantJobApplicationCheck();
+                ApplicantJobApplicationUpdate();
+                ApplicantJobApplicationCheck();
+                ApplicantJobApplicationRemove();
+            }
         }
 
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_ApplicantResumeRepository()
         {
-            ApplicantResumeAdd();
-            ApplicantResumeCheck();
-            ApplicantResumeUpdate();
-            ApplicantResumeCheck();
-            ApplicantResumeRemove();
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                ApplicantResumeAdd();
+                ApplicantResumeCheck();
+                ApplicantResumeUpdate();
+                ApplicantResumeCheck();
+                ApplicantResumeRemove();
+            }
         }
 
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_ApplicantSkillRepository()
         {
-            ApplicantSkillAdd();
-            ApplicantSkillCheck();
-            ApplicantSkillUpdate();
-            ApplicantSkillCheck();
-            ApplicantSkillRemove();
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                ApplicantSkillAdd();
+                ApplicantSkillCheck();
+                ApplicantSkillUpdate();
+                ApplicantSkillCheck();
+                ApplicantSkillRemove();
+            }
         }
 
         [TestMethod]
         public void Assignment2_DeepDive_CRUD_Test_ApplicantWorkHistoryRepository()
         {
-            ApplicantWorkHistoryAdd();
-            ApplicantWorkHistoryCheck();
-            ApplicantWorkHistoryUpdate();
-            ApplicantWorkHistoryCheck();
-            ApplicantWorkHistoryRemove();
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                ApplicantWorkHistoryAdd();
+                ApplicantWorkHistoryCheck();
+                ApplicantWorkHistoryUpdate();
+                ApplicantWorkHistoryCheck();
+                ApplicantWorkHistoryRemove();
+            }
         }
 
 
