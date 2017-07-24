@@ -4,6 +4,7 @@ using CareerCloud.ADODataAccessLayer;
 using CareerCloud.Pocos;
 using System.Reflection;
 using System.Linq;
+using System.Transactions;
 
 namespace CareerCloud.UnitTests.Assignment2
 {
@@ -36,6 +37,8 @@ namespace CareerCloud.UnitTests.Assignment2
 
         private Type[] _types;
 
+        private DatabaseConstraints _dbConstraints;
+
         [TestInitialize]
         public void Init_Pocos()
         {
@@ -61,6 +64,8 @@ namespace CareerCloud.UnitTests.Assignment2
             ApplicantSkills_Init();
             AappliantWorkHistory_Init();
             ApplicantJobApplication_Init();
+
+            _dbConstraints = new DatabaseConstraints();
         }
 
         #region DTOCreation
@@ -353,130 +358,290 @@ namespace CareerCloud.UnitTests.Assignment2
                 }
             }
         }
+        
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_SystemCountryCodeRepository()
+        {
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                _dbConstraints.DisableConstraintsForPoco(_systemCountry.GetType());
+                SystemCountryCodeAdd();
+                SystemCountryCodeCheck();
+                SystemCountryCodeUpdate();
+                SystemCountryCodeCheck();
+                SystemCountryCodeRemove();
+                _dbConstraints.EnableConstraintsForPoco(_systemCountry.GetType());
+            }
+        }
 
         [TestMethod]
-        public void Assignment2_DeepDive_CRUD_Test()
+        public void Assignment2_DeepDive_CRUD_Test_SystemLanguageCodeRepository()
         {
-            SystemCountryCodeAdd();
-            SystemCountryCodeCheck();
-            SystemCountryCodeUpdate();
-            SystemCountryCodeCheck();
-
-            SystemLanguageCodeAdd();
-            SystemLanguageCodeCheck();
-            SystemLanguageCodeUpdate();
-            SystemLanguageCodeCheck();
-
-            CompanyProfileAdd();
-            CompanyProfileCheck();
-            CompanyProfileUpdate();
-            CompanyProfileCheck();
-
-            CompanyDescriptionAdd();
-            CompanyDescriptionCheck();
-            CompanyDescriptionUpdate();
-            CompanyDescriptionCheck();
-
-            CompanyJobAdd();
-            CompanyJobCheck();
-            CompanyJobUpdate();
-            CompanyJobCheck();
-
-            CompanyJobDescriptionAdd();
-            CompanyJobDescriptionCheck();
-            CompanyJobDescriptionUpdate();
-            CompanyJobDescriptionCheck();
-
-            CompanyLocationAdd();
-            CompanyLocationCheck();
-            CompanyLocationUpdate();
-            CompanyLocationCheck();
-
-            CompanyJobEducationAdd();
-            CompanyJobEducationCheck();
-            CompanyJobEducationUpdate();
-            CompanyJobEducationCheck();
-
-            CompanyJobSkillAdd();
-            CompanyJobSkillCheck();
-            CompanyJobSkillUpdate();
-            CompanyJobSkillCheck();
-
-            SecurityLoginAdd();
-            SecurityLoginCheck();
-            SecurityLoginUpdate();
-            SecurityLoginCheck();
-
-            SecurityLoginLogAdd();
-            SecurityLoginLogCheck();
-            SecurityLoginLogUpdate();
-            SecurityLoginLogCheck();
-
-            SecurityRoleAdd();
-            SecurityRoleCheck();
-            SecurityRoleUpdate();
-            SecurityRoleCheck();
-
-            SecurityLoginRoleAdd();
-            SecurityLoginRoleCheck();
-
-            ApplicantProfileAdd();
-            ApplicantProfileCheck();
-            ApplicantProfileUpdate();
-            ApplicantProfileCheck();
-
-            ApplicantEducationAdd();
-            ApplicantEducationCheck();
-            ApplicantEducationUpdate();
-            ApplicantEducationCheck();
-
-            ApplicantJobApplicationAdd();
-            ApplicantJobApplicationCheck();
-            ApplicantJobApplicationUpdate();
-            ApplicantJobApplicationCheck();
-
-            ApplicantResumeAdd();
-            ApplicantResumeCheck();
-            ApplicantResumeUpdate();
-            ApplicantResumeCheck();
-
-            ApplicantSkillAdd();
-            ApplicantSkillCheck();
-            ApplicantSkillUpdate();
-            ApplicantSkillCheck();
-
-            ApplicantWorkHistoryAdd();
-            ApplicantWorkHistoryCheck();
-            ApplicantWorkHistoryUpdate();
-            ApplicantWorkHistoryCheck();
-
-            #region Cleanup
-            ApplicantWorkHistoryRemove();
-            ApplicantSkillRemove();
-            ApplicantResumeRemove();
-
-            ApplicantJobApplicationRemove();
-            ApplicantEducationRemove();
-            ApplicantProfileRemove();
-
-            SecurityLoginRoleRemove();
-            SecurityRoleRemove();
-            SecurityLoginLogRemove();
-            SecurityLoginRemove();
-
-            CompanyJobSkillRemove();
-            CompanyJobEducationRemove();
-            CompanyLocationRemove();
-            CompanyJobDescRemove();
-            CompanyJobRemove();
-            CompanyDescriptionRemove();
-            CompanyProfileRemove();
-
-            SystemLanguageCodeRemove();
-            SystemCountryCodeRemove();
-
-            #endregion
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                _dbConstraints.DisableConstraintsForPoco(_systemLangCode.GetType());
+                SystemLanguageCodeAdd();
+                SystemLanguageCodeCheck();
+                SystemLanguageCodeUpdate();
+                SystemLanguageCodeCheck();
+                SystemLanguageCodeRemove();
+                _dbConstraints.EnableConstraintsForPoco(_systemLangCode.GetType());
+            }
         }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_CompanyProfileRepository()
+        {
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                _dbConstraints.DisableConstraintsForPoco(_companyProfile.GetType());
+                CompanyProfileAdd();
+                CompanyProfileCheck();
+                CompanyProfileUpdate();
+                CompanyProfileCheck();
+                CompanyProfileRemove();
+                _dbConstraints.EnableConstraintsForPoco(_companyProfile.GetType());
+            }
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_CompanyDescriptionRepository()
+        {
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                _dbConstraints.DisableConstraintsForPoco(_companyDescription.GetType());
+                CompanyDescriptionAdd();
+                CompanyDescriptionCheck();
+                CompanyDescriptionUpdate();
+                CompanyDescriptionCheck();
+                CompanyDescriptionRemove();
+                _dbConstraints.EnableConstraintsForPoco(_companyDescription.GetType());
+            }
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_CompanyJobRepository()
+        {
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                _dbConstraints.DisableConstraintsForPoco(_companyJob.GetType());
+                CompanyJobAdd();
+                CompanyJobCheck();
+                CompanyJobUpdate();
+                CompanyJobCheck();
+                CompanyJobRemove();
+                _dbConstraints.EnableConstraintsForPoco(_companyJob.GetType());
+            }
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_CompanyJobDescriptionRepository()
+        {
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                _dbConstraints.DisableConstraintsForPoco(_companyJobDescription.GetType());
+                CompanyJobDescriptionAdd();
+                CompanyJobDescriptionCheck();
+                CompanyJobDescriptionUpdate();
+                CompanyJobDescriptionCheck();
+                CompanyJobDescRemove();
+                _dbConstraints.EnableConstraintsForPoco(_companyJobDescription.GetType());
+            }
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_CompanyLocationRepository()
+        {
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                _dbConstraints.DisableConstraintsForPoco(_companyLocation.GetType());
+                CompanyLocationAdd();
+                CompanyLocationCheck();
+                CompanyLocationUpdate();
+                CompanyLocationCheck();
+                CompanyLocationRemove();
+                _dbConstraints.EnableConstraintsForPoco(_companyLocation.GetType());
+            }
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_CompanyJobEducationRepository()
+        {
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                _dbConstraints.DisableConstraintsForPoco(_companyJobEducation.GetType());
+                CompanyJobEducationAdd();
+                CompanyJobEducationCheck();
+                CompanyJobEducationUpdate();
+                CompanyJobEducationCheck();
+                CompanyJobEducationRemove();
+                _dbConstraints.EnableConstraintsForPoco(_companyJobEducation.GetType());
+            }
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_CompanyJobSkillRepository()
+        {
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                _dbConstraints.DisableConstraintsForPoco(_companyJobSkill.GetType());
+                CompanyJobSkillAdd();
+                CompanyJobSkillCheck();
+                CompanyJobSkillUpdate();
+                CompanyJobSkillCheck();
+                CompanyJobSkillRemove();
+                _dbConstraints.EnableConstraintsForPoco(_companyJobSkill.GetType());
+            }
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_SecurityLoginRepository()
+        {
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                _dbConstraints.DisableConstraintsForPoco(_securityLogin.GetType());
+                SecurityLoginAdd();
+                SecurityLoginCheck();
+                SecurityLoginUpdate();
+                SecurityLoginCheck();
+                SecurityLoginRemove();
+                _dbConstraints.EnableConstraintsForPoco(_securityLogin.GetType());
+            }
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_SecurityLoginLogRepository()
+        {
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                _dbConstraints.DisableConstraintsForPoco(_securityLoginLog.GetType());
+                SecurityLoginLogAdd();
+                SecurityLoginLogCheck();
+                SecurityLoginLogUpdate();
+                SecurityLoginLogCheck();
+                SecurityLoginLogRemove();
+                _dbConstraints.EnableConstraintsForPoco(_securityLoginLog.GetType());
+            }
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_SecurityRoleRepository()
+        {
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                _dbConstraints.DisableConstraintsForPoco(_securityRole.GetType());
+                SecurityRoleAdd();
+                SecurityRoleCheck();
+                SecurityRoleUpdate();
+                SecurityRoleCheck();
+                SecurityRoleRemove();
+                _dbConstraints.EnableConstraintsForPoco(_securityRole.GetType());
+            }
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_SecurityLoginRoleRepository()
+        {
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                _dbConstraints.DisableConstraintsForPoco(_securityLoginRole.GetType());
+                SecurityLoginRoleAdd();
+                SecurityLoginRoleCheck();
+                SecurityLoginRoleRemove();
+                _dbConstraints.EnableConstraintsForPoco(_securityLoginRole.GetType());
+            }
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_ApplicantProfileRepository()
+        {
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                _dbConstraints.DisableConstraintsForPoco(_applicantProfile.GetType());
+                ApplicantProfileAdd();
+                ApplicantProfileCheck();
+                ApplicantProfileUpdate();
+                ApplicantProfileCheck();
+                ApplicantProfileRemove();
+                _dbConstraints.EnableConstraintsForPoco(_applicantProfile.GetType());
+            }
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_ApplicantEducationRepository()
+        {
+            using (TransactionScope Scope = new TransactionScope())
+            {             
+                _dbConstraints.DisableConstraintsForPoco(_applicantEducation.GetType());
+                ApplicantEducationAdd();
+                ApplicantEducationCheck();
+                ApplicantEducationUpdate();
+                ApplicantEducationCheck();
+                ApplicantEducationRemove();
+                _dbConstraints.EnableConstraintsForPoco(_applicantEducation.GetType());               
+            }           
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_ApplicantJobApplicationRepository()
+        {
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                _dbConstraints.DisableConstraintsForPoco(_applicantJobApplication.GetType());
+                ApplicantJobApplicationAdd();
+                ApplicantJobApplicationCheck();
+                ApplicantJobApplicationUpdate();
+                ApplicantJobApplicationCheck();
+                ApplicantJobApplicationRemove();
+                _dbConstraints.EnableConstraintsForPoco(_applicantJobApplication.GetType());
+            }
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_ApplicantResumeRepository()
+        {
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                _dbConstraints.DisableConstraintsForPoco(_applicantResume.GetType());
+                ApplicantResumeAdd();
+                ApplicantResumeCheck();
+                ApplicantResumeUpdate();
+                ApplicantResumeCheck();
+                ApplicantResumeRemove();
+                _dbConstraints.EnableConstraintsForPoco(_applicantResume.GetType());
+            }
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_ApplicantSkillRepository()
+        {
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                _dbConstraints.DisableConstraintsForPoco(_applicantSkills.GetType());
+                ApplicantSkillAdd();
+                ApplicantSkillCheck();
+                ApplicantSkillUpdate();
+                ApplicantSkillCheck();
+                ApplicantSkillRemove();
+                _dbConstraints.EnableConstraintsForPoco(_applicantSkills.GetType());
+            }
+        }
+
+        [TestMethod]
+        public void Assignment2_DeepDive_CRUD_Test_ApplicantWorkHistoryRepository()
+        {
+            using (TransactionScope Scope = new TransactionScope())
+            {
+                _dbConstraints.DisableConstraintsForPoco(_appliantWorkHistory.GetType());
+                ApplicantWorkHistoryAdd();
+                ApplicantWorkHistoryCheck();
+                ApplicantWorkHistoryUpdate();
+                ApplicantWorkHistoryCheck();
+                ApplicantWorkHistoryRemove();
+                _dbConstraints.EnableConstraintsForPoco(_appliantWorkHistory.GetType());
+            }
+        }
+
 
         #region UpdateImplementation
         public void CompanyProfileUpdate()
@@ -1166,7 +1331,6 @@ namespace CareerCloud.UnitTests.Assignment2
         {
             if (string.IsNullOrEmpty(str)) return str;
             return str.Length <= maxLength ? str : str.Substring(0, maxLength);
-        }
+        }      
     }
-
 }
